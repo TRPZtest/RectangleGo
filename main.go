@@ -23,11 +23,11 @@ func isRightAngle(a, b, c point) bool {
 	ac := vector{c.x - a.x, c.y - a.y}
 	bc := vector{c.x - b.x, c.y - b.y}
 
-	prod := float64(ac.x*bc.x + ac.y*bc.y) //dot product of vectors
+	dotProd := float64(ac.x*bc.x + ac.y*bc.y) //dot product of vectors
 
-	sum := math.Sqrt(float64(ac.x*ac.x+ac.y*ac.y)) * math.Sqrt(float64(bc.x*bc.x+bc.y*bc.y)) //sum of modules
+	modulesProd := math.Sqrt(float64(ac.x*ac.x+ac.y*ac.y)) * math.Sqrt(float64(bc.x*bc.x+bc.y*bc.y)) //prod of modules
 
-	cos := prod / sum
+	cos := dotProd / modulesProd
 
 	return isEqual(cos, 0.0)
 }
@@ -44,7 +44,7 @@ func isEqual(x, y float64) bool {
 	return result
 }
 
-//x and y is possible 	diagonal
+//this function checks equals of pposite sides and then checks one angle
 func isRectangle(diagonalX, diagonalY diagonal) bool {
 
 	sideA := getDistanceBetweenPoints(diagonalX.a, diagonalY.a)
@@ -90,7 +90,7 @@ func remove(slice []point, n int) []point {
 
 func main() {
 
-	seed := 1024
+	seed := 255
 
 	rand := rand.New(rand.NewSource(int64(seed)))
 
